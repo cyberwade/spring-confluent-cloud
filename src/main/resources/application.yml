@@ -15,9 +15,16 @@ spring:
             key-serializer: org.apache.kafka.common.serialization.StringSerializer
             value-serializer: org.apache.kafka.common.serialization.StringSerializer
         consumer:
-            group-id: spring-confluent-cloud
+            group-id: spring-confluent-cloud-consume
             key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
             value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
             enable-auto-commit: false
         listener:
             ack-mode: manual
+        streams:
+            replication-factor: 3
+            application-id: spring-confluent-cloud-stream
+            properties:
+                default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                auto.offset.reset: earliest
